@@ -1,0 +1,7 @@
+- name: centos7 initialize.
+  hosts: initialize-group
+  remote_user: root
+  roles:
+  - initialize
+#  - zabbix-agent
+

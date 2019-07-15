@@ -1,0 +1,33 @@
+- name: copy alirepo
+  copy: src=Centos-7.repo dest=/etc/yum.repos.d/Centos-7.repo
+- name: copy epel
+  copy: src=epel.repo dest=/etc/yum.repos.d/epel.repo
+#- name: 重构源
+#  yum: name=makecache
+- name: install vim net-tools
+#多项同步安装
+  yum: name={{ item }} state=installed
+  with_items:
+    - vim
+    - net-tools
+    - wget
+- name: 安装ntp
+  yum: name=chrony state=installed
+- name: 开机启动ntp
+  service: name=chronyd enabled=yes
+- name: 修改时区
+  shell: timedatectl set-timezone Asia/Shanghai
+#- name: 修改ntp配置
+#  shell: sed -i ‘s/server 0.centos.pool.ntp.org iburst/server 172.30.100.139 iburst/g’ 
+- name: 重启ntp服务
+  service: name=chronyd state=restarted
+- name: 查看同步是否正确
+  shell: 'chronyc sources -v >> /tmp/ntp.log'
+- name: 关闭防火墙
+  shell: systemctl disable firewalld
+- name: 关闭selinux
+  shell: sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
+- name: 减少swap使用率
+  shell: echo 'vm.swappiness = 1' >> /etc/sysctl.conf
+
+
