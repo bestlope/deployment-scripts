@@ -1,0 +1,43 @@
+- name: 拆卸旧版本Docker软件
+  yum: name={{ item }} state=removed
+  with_items:
+    - docker
+    - docker-client 
+    - docker-common
+    - docker-latest
+    - docker-latest-logrotate
+    - docker-selinux
+    - docker-engine-selinux
+    - docker-engine
+    - container*
+
+- name: 安装docker必要的系统工具
+  yum: name={{ item }} state=installed
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - bash-completion
+
+- name: 添加阿里源docker仓库信息
+  copy: src=docker-ce.repo dest=/etc/yum.repos.d/docker-ce.repo
+
+- name: 安装docker的latest版本
+  yum: name=docker state=latest
+
+- name: 设置docker开机启动
+  shell: systemctl enable docker
+
+- name: 启动docker
+  shell: systemctl start docker
+
+- name: 配置docker的守护进程文件
+  copy: src=daemon.json dest=/etc/docker/daemon.json
+
+- name: 重启docker
+  shell: systemctl restart docker
+
+
+
+
+

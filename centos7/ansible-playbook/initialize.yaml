@@ -2,6 +2,7 @@
   hosts: initialize-group
   remote_user: root
   roles:
-  - initialize
+#  - initialize
 #  - zabbix-agent
+  - docker
 
