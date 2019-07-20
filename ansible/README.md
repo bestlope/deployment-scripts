@@ -1,4 +1,6 @@
 ## ansible安装及准备
+参考网站：https://www.w3cschool.cn/automate_with_ansible/automate_with_ansible-1khc27p1.html
+
 ### Centos7系统环境
 
 ```
