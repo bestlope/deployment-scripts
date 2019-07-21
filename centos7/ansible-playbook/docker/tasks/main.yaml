@@ -22,8 +22,8 @@
 - name: 添加阿里源docker仓库信息
   copy: src=docker-ce.repo dest=/etc/yum.repos.d/docker-ce.repo
 
-- name: 安装docker的latest版本
-  yum: name=docker state=latest
+- name: 安装docker-ce的最新版本
+  yum: name=docker-ce state=latest
 
 - name: 设置docker开机启动
   shell: systemctl enable docker
