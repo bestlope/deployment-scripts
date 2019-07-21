@@ -1,3 +1,4 @@
 {
-"registry-mirrors": ["https://7bezldxe.mirror.aliyuncs.com/"]
+"registry-mirrors": ["https://7bezldxe.mirror.aliyuncs.com/"],
+"insecure-registries":["192.168.123.130:80"]
 }

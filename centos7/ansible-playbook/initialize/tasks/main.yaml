@@ -2,6 +2,8 @@
   copy: src=Centos-7.repo dest=/etc/yum.repos.d/Centos-7.repo
 - name: copy epel
   copy: src=epel.repo dest=/etc/yum.repos.d/epel.repo
+- name: copy sysctl.conf
+  copy: src=sysctl.conf dest=/etc/sysctl.conf
 #- name: 重构源
 #  yum: name=makecache
 - name: install vim net-tools
@@ -27,7 +29,7 @@
   shell: systemctl disable firewalld
 - name: 关闭selinux
   shell: sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
-- name: 减少swap使用率
-  shell: echo 'vm.swappiness = 1' >> /etc/sysctl.conf
+#- name: 减少swap使用率
+#  shell: echo 'vm.swappiness = 1' >> /etc/sysctl.conf
 
 
